@@ -37,11 +37,20 @@ jobs:
           pip install cython virtualenv
           pip install buildozer python-for-android
 
-      - name: Ensure Python-for-Android Directory Exists
+      - name: Install Android SDK Build Tools
         run: |
-          mkdir -p ~/.buildozer/android/platform/python-for-android
+          export ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
+          mkdir -p $ANDROID_SDK_ROOT
+          yes | sdkmanager --licenses
+          sdkmanager "build-tools;34.0.0" "platform-tools" "platforms;android-33"
 
-      - name: Initialize Buildozer (without clean)
+      - name: Ensure Build Tools Directory Exists
+        run: |
+          mkdir -p ~/.buildozer/android/platform/android-sdk/build-tools/34.0.0
+
+      - name: Build APK
+        env:
+          ANDROIDSDK: $HOME/.buildozer/android/platform/android-sdk
         run: |
           buildozer android debug
 
