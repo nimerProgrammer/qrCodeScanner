@@ -28,13 +28,19 @@ jobs:
           pip install --upgrade pip
           pip install cython virtualenv
 
-      - name: Install Buildozer and requirements
+      - name: Install Buildozer and Android SDK
         run: |
           pip install buildozer
           sudo apt install -y python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
                               libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev \
                               libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
                               gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav
+          buildozer android clean
+
+      - name: Accept Android Licenses and Install Build Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;34.0.0"
 
       - name: Build APK
         run: |
