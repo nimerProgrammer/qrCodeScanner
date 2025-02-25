@@ -42,7 +42,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,hostpython3,kivy,docutils,filetype,Kivy-Garden,pygments,requests,pyjnius,android,plyer,opencv-python,qrcode,pillow,camera4kivy,https://github.com/kivymd/KivyMD/archive/master.zip
+requirements = python3,hostpython3,kivy,docutils,filetype,Kivy-Garden,pygments,requests,pyjnius,plyer,opencv-python,qrcode,pillow
 
 
 # (str) Custom source folders for requirements
@@ -53,7 +53,7 @@ requirements = python3,hostpython3,kivy,docutils,filetype,Kivy-Garden,pygments,r
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = %(source.dir)s/data/icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
@@ -317,7 +317,7 @@ android.allow_backup = True
 # android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
-# android.debug_artifact = apk
+android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific
