@@ -33,7 +33,9 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install buildozer
-          buildozer init
+          
+          # Only run buildozer init if buildozer.spec does not exist
+          [ -f buildozer.spec ] || buildozer init
 
       - name: 📥 Install Android Command Line Tools
         run: |
@@ -47,7 +49,7 @@ jobs:
           unzip commandlinetools.zip
           
           # Move extracted files correctly
-          mv cmdline-tools $CMDLINE_TOOLS/latest
+          mv cmdline-tools $CMDLINE_TOOLS/latest || true
           
           # Grant execute permission
           chmod +x $CMDLINE_TOOLS/latest/bin/sdkmanager
