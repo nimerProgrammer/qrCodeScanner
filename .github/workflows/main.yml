@@ -1,10 +1,10 @@
-name: Build Android APK
+name: Build APK  
 
 on:  
   push:  
-    branches: [main]  
+    branches: [ main ]  
   pull_request:  
-    branches: [main]  
+    branches: [ main ]  
 
 jobs:  
   build:  
@@ -22,30 +22,35 @@ jobs:
       - name: Install Dependencies  
         run: |  
           python -m pip install --upgrade pip  
-          pip install buildozer cython python-for-android  
+          pip install --upgrade buildozer cython  
 
       - name: Set Up Android SDK  
         run: |  
           export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk  
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$PATH  
 
-          # Remove any existing SDK to prevent conflicts  
-          rm -rf $ANDROID_HOME/cmdline-tools  
-
-          mkdir -p $ANDROID_HOME  
+          # Ensure SDK directory exists  
+          mkdir -p $ANDROID_HOME/cmdline-tools  
           cd $ANDROID_HOME  
+
+          # Download latest command-line tools  
           curl -O https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip  
-          unzip commandlinetools-linux-11076708_latest.zip -d cmdline-tools  
-          mv cmdline-tools cmdline-tools/latest  
+          unzip commandlinetools-linux-11076708_latest.zip  
+
+          # Fix folder structure to avoid move error  
+          rm -rf cmdline-tools/latest  
+          mkdir -p cmdline-tools/latest  
+          mv cmdline-tools/* cmdline-tools/latest/  
 
           yes | sdkmanager --licenses  
           sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"  
 
       - name: Build APK  
-        run: buildozer -v android debug  
+        run: |  
+          buildozer android debug  
 
       - name: Upload APK Artifact  
         uses: actions/upload-artifact@v4  
         with:  
-          name: app-release.apk  
+          name: built-apk  
           path: bin/*.apk  
