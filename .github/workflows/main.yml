@@ -35,15 +35,20 @@ jobs:
                               libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev \
                               libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
                               gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav
-          buildozer android clean
+
+      - name: Fix Missing `python-for-android`
+        run: |
+          mkdir -p .buildozer/android/platform/python-for-android
+          pip install --upgrade python-for-android
 
       - name: Accept Android Licenses and Install Build Tools
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;34.0.0"
 
-      - name: Build APK
+      - name: Clean and Build APK
         run: |
+          buildozer android clean
           buildozer android debug
 
       - name: Upload APK Artifact
