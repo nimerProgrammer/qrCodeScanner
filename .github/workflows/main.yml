@@ -37,21 +37,11 @@ jobs:
           pip install cython virtualenv
           pip install buildozer python-for-android
 
-      - name: Force Reinstall Python-for-Android
-        run: |
-          pip uninstall -y python-for-android
-          pip install python-for-android --no-cache-dir
-
       - name: Ensure Python-for-Android Directory Exists
         run: |
           mkdir -p ~/.buildozer/android/platform/python-for-android
 
-      - name: Clean Buildozer Cache
-        run: |
-          rm -rf ~/.buildozer/android/platform/python-for-android
-          buildozer android clean
-
-      - name: Build APK
+      - name: Initialize Buildozer (without clean)
         run: |
           buildozer android debug
 
