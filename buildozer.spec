@@ -110,19 +110,19 @@ android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, CAMERA
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 31
+#android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
-android.minapi = 21
+#android.minapi = 21
 
 # (int) Android SDK version to use
-android.sdk = 20
+#android.sdk = 20
 
 # (str) Android NDK version to use
-android.ndk = 23b
+#android.ndk = 23b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
-android.ndk_api = 21
+#android.ndk_api = 21
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path =
@@ -145,7 +145,7 @@ android.ndk_api = 21
 android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
-android.entrypoint = org.kivy.android.PythonActivity
+#android.entrypoint = org.kivy.android.PythonActivity
 
 # (str) Full name including package path of the Java class that implements Android Activity
 # use that parameter together with android.entrypoint to set custom Java class instead of PythonActivity
@@ -299,7 +299,7 @@ android.archs = arm64-v8a, armeabi-v7a
 # android.numeric_version = 1
 
 # (bool) enables Android auto backup feature (Android API >=23)
-android.allow_backup = True
+#android.allow_backup = False
 
 # (str) XML file for custom backup rules (see official auto backup documentation)
 # android.backup_rules =
