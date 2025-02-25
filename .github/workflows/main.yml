@@ -29,7 +29,7 @@ jobs:
                               libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev \
                               libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
                               gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav \
-                              autoconf build-essential cmake pkg-config
+                              autoconf build-essential cmake pkg-config wget
 
       - name: Install Python Dependencies
         run: |
@@ -37,10 +37,17 @@ jobs:
           pip install cython virtualenv
           pip install buildozer python-for-android
 
-      - name: Install Android SDK Build Tools
+      - name: Install Android SDK Command Line Tools
         run: |
-          export ANDROID_SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
-          mkdir -p $ANDROID_SDK_ROOT
+          export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
+          export ANDROID_SDK_ROOT=$ANDROID_HOME
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
+          unzip -q cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+          rm cmdline-tools.zip
+          echo "export PATH=\$ANDROID_HOME/cmdline-tools/latest/bin:\$PATH" >> ~/.bashrc
+          source ~/.bashrc
           yes | sdkmanager --licenses
           sdkmanager "build-tools;34.0.0" "platform-tools" "platforms;android-33"
 
@@ -50,7 +57,7 @@ jobs:
 
       - name: Build APK
         env:
-          ANDROIDSDK: $HOME/.buildozer/android/platform/android-sdk
+          ANDROID_SDK_ROOT: $HOME/.buildozer/android/platform/android-sdk
         run: |
           buildozer android debug
 
