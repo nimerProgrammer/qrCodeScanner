@@ -6,7 +6,7 @@
 [app]
 
 # (str) Title of your application
-title = QR Code Scanner and Genertor
+title = QR Code Scanner and Generator
 
 # (str) Package name
 package.name = QRCodeScanner
@@ -42,7 +42,8 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3==3.8.10,kivy==2.3.1,pyjnius==1.6.1,plyer==2.1.0,opencv-python==4.11.0.86,qrcode==7.4.2,pillow==10.4.0
+#requirements = python3==3.8.10,kivy==2.3.1,pyjnius==1.6.1,plyer==2.1.0,opencv-python==4.11.0.86,qrcode==7.4.2,pillow==10.4.0,requests
+requirements = python3,kivy==2.3.0,requests,opencv-python,pillow[pil],numpy,qrcode
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -103,13 +104,14 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions.html for all the supported syntaxes and properties)
-android.permissions = android.permission.INTERNET,CAMERA, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+#android.permissions = android.permission.INTERNET,CAMERA, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+android.permissions = INTERNET, CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
 #android.minapi = 21
@@ -141,7 +143,7 @@ android.permissions = android.permission.INTERNET,CAMERA, (name=android.permissi
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-#android.accept_sdk_license = False
+android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.kivy.android.PythonActivity
@@ -225,6 +227,9 @@ android.permissions = android.permission.INTERNET,CAMERA, (name=android.permissi
 # please enclose in double quotes 
 # e.g. android.gradle_repositories = "maven { url 'https://repo.spring.io/release' }"
 #android.add_gradle_repositories =
+
+# (str) Gradle command line arguments
+android.gradle_arguments = --no-daemon -Dorg.gradle.jvmargs=-Xmx4g
 
 # (list) packaging options to add
 # see https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/PackagingOptions
@@ -316,7 +321,7 @@ android.archs = arm64-v8a, armeabi-v7a
 # android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
-#android.debug_artifact = apk
+android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific
