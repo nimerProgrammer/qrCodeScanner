@@ -228,9 +228,6 @@ android.accept_sdk_license = True
 # e.g. android.gradle_repositories = "maven { url 'https://repo.spring.io/release' }"
 #android.add_gradle_repositories =
 
-# (str) Gradle command line arguments
-android.gradle_arguments = --no-daemon -Dorg.gradle.jvmargs=-Xmx4g
-
 # (list) packaging options to add
 # see https://developer.android.com/reference/tools/gradle-api/7.1/com/android/build/api/dsl/PackagingOptions
 # can be necessary to solve conflicts in gradle_dependencies
