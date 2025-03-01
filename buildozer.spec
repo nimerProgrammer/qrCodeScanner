@@ -362,8 +362,7 @@ android.debug_artifact = apk
 
 # (str) extra command line arguments to pass when invoking pythonforandroid.toolchain
 #p4a.extra_args =
-
-
+p4a.extra_args = --gradle-option "-Dorg.gradle.jvmargs=-Xmx4g"
 
 #
 # iOS specific
