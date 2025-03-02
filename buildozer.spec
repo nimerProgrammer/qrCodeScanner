@@ -104,8 +104,9 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions.html for all the supported syntaxes and properties)
-#android.permissions = android.permission.INTERNET,CAMERA, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = INTERNET, CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE
+#android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+android.permissions = android.permission.INTERNET, android.permission.CAMERA, android.permission.WRITE_EXTERNAL_STORAGE:maxSdkVersion=18
+
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -143,7 +144,7 @@ android.permissions = INTERNET, CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_ST
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-android.accept_sdk_license = True
+# android.accept_sdk_license = False
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.kivy.android.PythonActivity
@@ -217,7 +218,6 @@ android.accept_sdk_license = True
 # contains an 'androidx' package, or any package from Kotlin source.
 # android.enable_androidx requires android.api >= 28
 #android.enable_androidx = True
-android.gradle_extra_args = "-Dorg.gradle.jvmargs=-Xmx4g"
 
 # (list) add java compile options
 # this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option
@@ -301,7 +301,7 @@ android.archs = arm64-v8a, armeabi-v7a
 # android.numeric_version = 1
 
 # (bool) enables Android auto backup feature (Android API >=23)
-#android.allow_backup = False
+android.allow_backup = True
 
 # (str) XML file for custom backup rules (see official auto backup documentation)
 # android.backup_rules =
@@ -319,7 +319,7 @@ android.archs = arm64-v8a, armeabi-v7a
 # android.release_artifact = aab
 
 # (str) The format used to package the app for debug mode (apk or aar).
-android.debug_artifact = apk
+# android.debug_artifact = apk
 
 #
 # Python for android (p4a) specific
@@ -362,7 +362,8 @@ android.debug_artifact = apk
 
 # (str) extra command line arguments to pass when invoking pythonforandroid.toolchain
 #p4a.extra_args =
-p4a.extra_args = --gradle-option "-Dorg.gradle.jvmargs=-Xmx4g"
+
+
 
 #
 # iOS specific
