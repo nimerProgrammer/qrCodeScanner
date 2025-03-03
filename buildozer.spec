@@ -43,7 +43,8 @@ version = 0.1
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 #requirements = python3==3.8.10,kivy==2.3.1,pyjnius==1.6.1,plyer==2.1.0,opencv-python==4.11.0.86,qrcode==7.4.2,pillow==10.4.0,requests
-requirements = python3,kivy==2.3.0,requests,opencv-python,pillow[pil],numpy,qrcode
+#requirements = python3,kivy==2.3.0,requests,opencv-python,pillow[pil],numpy,qrcode,cython
+requirements = python3,kivy==2.3.1,qrcode,numpy,opencv-python,opencv-contrib-python,pillow,requests,filetype
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -104,9 +105,8 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions.html for all the supported syntaxes and properties)
-#android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
-android.permissions = android.permission.INTERNET, android.permission.CAMERA, android.permission.WRITE_EXTERNAL_STORAGE:maxSdkVersion=18
-
+#android.permissions = android.permission.INTERNET,CAMERA (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
+android.permissions = INTERNET, CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
